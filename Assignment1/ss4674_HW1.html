@@ -14,7 +14,8 @@
 		In the Sanskrit tradition of prosody, there was interest in enumerating all patterns of long (L) syllables that are 2 units
 		of duration, and short (S) syllables that are 1 unit of duration. Counting the different patterns of L and S of a given
 		duration results in the Fibonacci numbers: the number of patterns that are m short syllables long is the Fibonacci number
-		F<sub>m + 1</sub>.
+		F
+		<sub>m + 1</sub>.
 	</p>
 	<br>
 	<br>
@@ -60,7 +61,7 @@
 			//set the div's content
 			document.getElementById("display_result").innerHTML = str_table;
 		}
-		
+
 		//funtion to compute fibonacci sequence
 		function fib(n) {
 			str_table = "<table border='2' ><tr><td width='50' align='center'>n</td><td>fib(n)</td></tr>";
@@ -72,6 +73,7 @@
 				str_table = str_table + "<tr><td>" + counter + "</td><td>" + f0 + "</td></tr>";
 				return 0;
 			}
+			//compute fibonacci sequence if input is greater than 0
 			for (var i = 0; i <= n; i++) {
 				str_table = str_table + "<tr><td>" + counter + "</td><td>" + f0 + "</td></tr>";
 				counter += 1;
