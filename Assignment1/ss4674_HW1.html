@@ -7,13 +7,13 @@
 
 <body>
 	<p>
-		&nbsp&nbsp&nbsp In the 1202 AD, Leonardo Fibonacci wrote in his book “Liber Abaci” of a simple numerical sequence that is the foundation for an incredible mathematical relationship behind phi.  This sequence was known as early as the 6th century AD by Indian mathematicians, but it was Fibonacci who introduced it to the west after his travels throughout the Mediterranean world and North Africa. He is also known as Leonardo Bonacci, as his name is derived in Italian from words meaning “son of (the) Bonacci”.
-
-		Starting with 0 and 1, each new number in the sequence is simply the sum of the two before it.
-		
-		0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144,  233, 377 . . .
-		
-		This sequence is shown in the right margin of a page in Liber Abaci, where a copy of the book is held by the Biblioteca Nazionale di Firenze.
+		&nbsp&nbsp&nbsp In the 1202 AD, Leonardo Fibonacci wrote in his book “Liber Abaci” of a simple numerical sequence that is
+		the foundation for an incredible mathematical relationship behind phi. This sequence was known as early as the 6th century
+		AD by Indian mathematicians, but it was Fibonacci who introduced it to the west after his travels throughout the Mediterranean
+		world and North Africa. He is also known as Leonardo Bonacci, as his name is derived in Italian from words meaning “son
+		of (the) Bonacci”. Starting with 0 and 1, each new number in the sequence is simply the sum of the two before it. 0, 1,
+		1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377 . . . This sequence is shown in the right margin of a page in Liber Abaci,
+		where a copy of the book is held by the Biblioteca Nazionale di Firenze.
 	</p>
 	<br>
 	<br>
@@ -36,16 +36,17 @@
 		//string variable to build the table
 		var str_table = "";
 
+		//check for validity of inputs and then call fib() to compute the fibonacci sequence
 		function compute() {
 			var user_input = document.getElementById("usr_input").value;
 
 			//check for no input
-			if (user_input.trim() == ""){
+			if (user_input.trim() == "") {
 				str_table = "Invalid Input";
 				document.getElementById("display_result").innerHTML = str_table;
 				return;
 			}
-			//user_input = parseInt(user_input);
+			
 			//check for valid input
 			if (isNaN(user_input)) {
 				console.log("User Input: " + user_input);
@@ -55,7 +56,7 @@
 			}
 
 			//check for decimal inputs
-			if ((user_input - Math.floor(user_input)) !== 0){
+			if ((user_input - Math.floor(user_input)) !== 0) {
 				str_table = "Cannot compute Fib of a decimal value.";
 				document.getElementById("display_result").innerHTML = str_table;
 				return;
@@ -67,9 +68,7 @@
 				document.getElementById("display_result").innerHTML = str_table;
 				return;
 			}
-			//console.log(user_input);
-			//var result = fib(user_input);
-			// document.getElementById("display_result").innerHTML = result;
+
 			fib(user_input);
 
 			//set the div's content
@@ -96,7 +95,7 @@
 				f1 = successor;
 			}
 			str_table = str_table + "</table>";
-			//return f0;
+
 		}
 	</script>
 </body>
