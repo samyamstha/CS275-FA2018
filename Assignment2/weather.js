@@ -2,25 +2,25 @@
 $(document).ready(function () {
 
     var resultDiv = document.getElementById("results");
+    var errStr = "Please, provide a valid client Id and secret Key!"
 
     $("#callButton").click(function () {
 
-        var errStr = "Please, provide a valid client Id and secret Key!"
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 if ((document.getElementById("clientId").value === "") || (document.getElementById("secretKey").value === "")) {
                     $("#results").html("<center>" + errStr + "</center>");
-                }else{
+                } else {
                     var id = document.getElementById("clientId").value;
                     var key = document.getElementById("secretKey").value;
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
-    
+
                     var URL = "https://api.aerisapi.com/forecasts/" + lat + "," + lon + "?client_id=" + id + "&client_secret=" + key;
                     request(URL);
                 }
-                
+
 
             });
         }
@@ -28,7 +28,6 @@ $(document).ready(function () {
             resultDiv.innerHTML = "Geolocation is not supported by this browser.";
         }
     });
-
 
     function request(URL) {
         var dayOfTheWeek = new Array(7);
@@ -55,9 +54,15 @@ $(document).ready(function () {
         monthOfTheYear[11] = "December";
 
         var tableStr = "</br></br><table id='weather-table' data-role= 'table'><thead><th>Day</th><th>Weather</th><th>Avg Feels Like</th><th>Avg Temp</th><th>Max Temp</th><th>Min Temp</th></thead><tbody>";
-        $.ajax({ type: "GET",
-         url: URL })
+        $.ajax({
+            type: "GET",
+            url: URL,
+               error: function(jqXHR, textStatus, errorThrown) {
+                $("#results").html("<center>" + errStr + "</center>");
+            }
+        })
             .then(function (data) {
+//                console.log(data);
                 if (data.success) {
                     var json = [];
                     json = data.response[0].periods;
@@ -74,11 +79,11 @@ $(document).ready(function () {
                         info["avgFeelsLike"] = this.avgFeelslikeF;
                         info["maxTempF"] = this.maxTempF;
                         info["minTempF"] = this.minTempF;
-                        tableStr += "<tr><td>" + dayOfTheWeek[info.day] + ", " 
-                        + monthOfTheYear[info.month] + " " + info.date + "</td><td>" 
-                        + info.weather + "</td><td>" + info.avgFeelsLike + "</td>"
+                        tableStr += "<tr><td>" + dayOfTheWeek[info.day] + ", "
+                            + monthOfTheYear[info.month] + " " + info.date + "</td><td>"
+                            + info.weather + "</td><td>" + info.avgFeelsLike + "</td>"
                             + "<td>" + info.avgTemp + "</td><td>" + info.maxTempF + "</td><td>"
-                             + info.minTempF + "</td></tr>";
+                            + info.minTempF + "</td></tr>";
                     });
 
                     $("#results").html(tableStr + "</tbody></table>");
