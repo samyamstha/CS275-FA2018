@@ -3,19 +3,77 @@
     <title>Assignment2</title> 
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script> -->
     <script type="text/javascript" src="weather.js"></script>
+    <!-- <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css"/> -->
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+    <style>
+    body{
+        background-color: #FFF333;
+    }
+
+    #callButton{
+        border-radius: 10px;
+        width:100%;
+        background-color: #339FFF;
+    }
+
+    #clientId, #secretKey{
+        width:100%;
+        border-radius: 20px; 
+    }
+
+    #weather-table{
+        width: 100%;
+      
+    }
+/* <!-- 
+    #weather-table tbody{
+        background-color: #339FFF; 
+        color: #fff;
+   } --> */
+   
+    #weather-table thead{
+        color: #fff;
+        background-color: #000000;
+        
+    }
+
+    #weather-table td{
+        text-align: center;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+    
+    </style>
     
 </head>
 
-<input type="text" id="clientId" placeholder="Enter your Client ID" style="height:50px;" value="ohmrifYdpgwGpcyzNaaEj">
-<input type="text" id="secretKey" placeholder="Enter your Secret Key" style="height:50px;" value="PjhGghNi8DuvATedLefvfxFCid7r6uSEib2yyJDw">
-<button id="callButton">Get forecast</button>
+<div data-role="header" data-position="fixed"><center>Seven days weather forecast</center></div>
+
+<br>
+<div data-role="controlgroup" data-type="vertical" >
+<input type="text" id="clientId" placeholder="Enter your Client ID" value="">
+
+<input type="text" id="secretKey" placeholder="Enter your Secret Key" value="">
+
+<button id="callButton">Get Forecast</button>
+</div>
+
+<br>
 
 <div id="results">
 
 </div>
 
+
+<div data-role="footer" data-position="fixed"><center>Seven days weather forecast</center></div>
 
 
 </html>
