@@ -11,12 +11,9 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-    body{
-        background-color: #FFF333;
-    }
 
     #callButton{
         border-radius: 10px;
@@ -33,11 +30,6 @@
         width: 100%;
       
     }
-/* <!-- 
-    #weather-table tbody{
-        background-color: #339FFF; 
-        color: #fff;
-   } --> */
    
     #weather-table thead{
         color: #fff;
@@ -55,25 +47,31 @@
     
 </head>
 
+<body>
+
+<!-- value="ohmrifYdpgwGpcyzNaaEj"
+value="PjhGghNi8DuvATedLefvfxFCid7r6uSEib2yyJDw" -->
+
 <div data-role="header" data-position="fixed"><center>Seven days weather forecast</center></div>
 
 <br>
 <div data-role="controlgroup" data-type="vertical" >
-<input type="text" id="clientId" placeholder="Enter your Client ID" value="ohmrifYdpgwGpcyzNaaEj">
+<input type="text" id="clientId" placeholder="Enter your Client ID"  >
 
-<input type="text" id="secretKey" placeholder="Enter your Secret Key" value="PjhGghNi8DuvATedLefvfxFCid7r6uSEib2yyJDw">
+<input type="text" id="secretKey" placeholder="Enter your Secret Key" >
 
 <button id="callButton">Get Forecast</button>
 </div>
 
 <br>
 
+
+<!-- Div to display the weather forecast table -->
 <div id="results">
 
 </div>
 
-
 <div data-role="footer" data-position="fixed"><center>Seven days weather forecast</center></div>
 
-
+</body>
 </html>

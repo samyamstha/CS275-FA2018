@@ -1,12 +1,13 @@
 
 $(document).ready(function () {
 
-    var resultDiv = document.getElementById("results");
+    
     var errStr = "Please, provide a valid client Id and secret Key!"
 
     $("#callButton").click(function () {
+        var resultDiv = document.getElementById("results");
 
-
+        //Get the geolocation of the user
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 if ((document.getElementById("clientId").value === "") || (document.getElementById("secretKey").value === "")) {
@@ -30,6 +31,8 @@ $(document).ready(function () {
     });
 
     function request(URL) {
+
+        //Array to look up the days of the week
         var dayOfTheWeek = new Array(7);
         dayOfTheWeek[0] = "Sunday";
         dayOfTheWeek[1] = "Monday";
@@ -39,6 +42,7 @@ $(document).ready(function () {
         dayOfTheWeek[5] = "Friday";
         dayOfTheWeek[6] = "Saturday";
 
+        //Array to look up the months of the year
         var monthOfTheYear = new Array();
         monthOfTheYear[0] = "January";
         monthOfTheYear[1] = "February";
@@ -53,11 +57,13 @@ $(document).ready(function () {
         monthOfTheYear[10] = "November";
         monthOfTheYear[11] = "December";
 
+        // String variable to create html table
         var tableStr = "</br></br><table id='weather-table' data-role= 'table'><thead><th>Day</th><th>Weather</th><th>Avg Feels Like</th><th>Avg Temp</th><th>Max Temp</th><th>Min Temp</th></thead><tbody>";
         $.ajax({
             type: "GET",
             url: URL,
                error: function(jqXHR, textStatus, errorThrown) {
+                   //Display error message
                 $("#results").html("<center>" + errStr + "</center>");
             }
         })
@@ -65,12 +71,16 @@ $(document).ready(function () {
 //                console.log(data);
                 if (data.success) {
                     var json = [];
+
                     json = data.response[0].periods;
                     console.log(json);
-                    info = [];
+
+                    //array to collect required information about the forecast
+                    info = {};
                     $.each(json, function () {
                         var dateTime = new Date(this.dateTimeISO);
                         console.log(dateTime);
+                        //populating the info array with required information about the forecast
                         info["day"] = dateTime.getDay();
                         info["date"] = dateTime.getDate();
                         info["month"] = dateTime.getMonth();
@@ -85,11 +95,10 @@ $(document).ready(function () {
                             + "<td>" + info.avgTemp + "</td><td>" + info.maxTempF + "</td><td>"
                             + info.minTempF + "</td></tr>";
                     });
-
                     $("#results").html(tableStr + "</tbody></table>");
                 }
                 else {
-                    alert("Error while trying to fetch data!");
+                    $("#results").html("<center>" + errStr + "</center>");
                 }
             });
     }
