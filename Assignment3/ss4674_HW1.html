@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <br>
+    <br>
+    <center>
+        <input type="text" placeholder="Enter a valid number" name="user_input" id="usr_input" />
+        <br>
+        <br>
+        <select id="aDropDown">
+            <option id="factorial" value="factorial" name="factorial">Get Factorial</option>
+            <option id="summation" value="summation" name="summation">Get Summantion</option>
+        </select>
+        <br>
+        <br>
+        <button id="calcButton" onclick="Calculation()">Calculate</button>
+
+
+        <br>
+        <br>
+        <div id="results">
+
+
+        </div>
+    </center>
+</body>
+
+
+<script>
+
+   
+    $(document).ready(function () {
+        $("#usr_input").focus();
+    });
+
+     function Calculation() {
+        var user_input = $("#usr_input").val();
+        var selection = $("#aDropDown").val();
+        console.log(user_input + " " + selection);
+
+        if (selection === "factorial") {
+            var URL = "http://localhost:8080/factorial";
+        } else {
+            var URL = "http://localhost:8080/summation";
+        }
+        var params = {
+            value: user_input
+        };
+
+        console.log(URL);
+        $.ajax({
+            type: "GET",
+            url: URL,
+            dataType = html,
+            data: params,
+            success: function (msg) {
+                console.log("return " + msg.result);
+                $("#results").html(msg.result);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("I am in the error");
+                //Display error message
+                $("#results").html("<center>" + "Error Occured" + "</center>");
+            }
+        });
+    }
+
+</script>
+
+
+</html>
