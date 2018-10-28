@@ -36,7 +36,7 @@ function summation(n){
     return (n + (summation(n - 1)));
 }
 
-//takes the request for factorial
+//takes the request for summation
 app.get("/summation", function(req, res){
 
     

@@ -83,11 +83,15 @@
             return;
         }
 
+
+        //Create the URL
         if (selection === "factorial") {
             var URL = "http://localhost:8080/factorial";
         } else {
             var URL = "http://localhost:8080/summation";
         }
+
+        //parameters to send along the GET request
         var params = {
             value: user_input
         };
