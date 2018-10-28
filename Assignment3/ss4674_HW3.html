@@ -1,16 +1,27 @@
 <html>
 
 <head>
+    <title>Assignment 3</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
+
+    <div data-role="header" data-position="fixed">
+        <center>Server Side Programming</center>
+    </div>
     <br>
-    <br>
-    <center>
+
+    <div data-role="controlgroup" data-type="vertical">
         <input type="text" placeholder="Enter a valid number" name="user_input" id="usr_input" />
-        <br>
-        <br>
+
+
         <select id="aDropDown">
             <option id="factorial" value="factorial" name="factorial">Get Factorial</option>
             <option id="summation" value="summation" name="summation">Get Summantion</option>
@@ -18,29 +29,59 @@
         <br>
         <br>
         <button id="calcButton" onclick="Calculation()">Calculate</button>
-
-
-        <br>
-        <br>
+    </div>
+    <br>
+    <center>
         <div id="results">
-
 
         </div>
     </center>
+
+    <div data-role="footer" data-position="fixed">
+        <center>Samyam C. Shrestha</center>
+    </div>
+
 </body>
 
 
 <script>
 
-   
+
     $(document).ready(function () {
         $("#usr_input").focus();
     });
 
-     function Calculation() {
-        var user_input = $("#usr_input").val();
+    function Calculation() {
+        var user_input = $("#usr_input").val().trim();
         var selection = $("#aDropDown").val();
+
         console.log(user_input + " " + selection);
+
+
+        //check for no input
+        if (user_input == "") {
+            $("#results").html("Invalid Input!");
+            return;
+        }
+
+        //check for valid input
+        if (isNaN(user_input)) {
+            console.log("User Input: " + user_input);
+            $("#results").html("Invalid Input!");
+            return;
+        }
+
+        //check for decimal inputs
+        if ((user_input - Math.floor(user_input)) !== 0) {
+            $("#results").html("Input cannot be a decimal value.");
+            return;
+        }
+
+        //check for negative number input
+        if (user_input < 0) {
+            $("#results").html("Input cannot be a negative value");
+            return;
+        }
 
         if (selection === "factorial") {
             var URL = "http://localhost:8080/factorial";
@@ -55,7 +96,6 @@
         $.ajax({
             type: "GET",
             url: URL,
-            dataType = html,
             data: params,
             success: function (msg) {
                 console.log("return " + msg.result);

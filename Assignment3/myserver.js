@@ -1,21 +1,14 @@
 
 
 var express = require('express');
-var cors = require('cors');
 var app = express();
 app.use(express.static("."));
-app.use(cors());
 app.listen(8080, function(){
     console.log("Server running...");
 });
 
 
-
-app.get("/greet", function(req, res){
-    res.send("Hello there!");
-});
-
-
+//calculate factorial
 function factorial(n){
     var n = parseInt(n);
     if(n == 0){
@@ -24,7 +17,7 @@ function factorial(n){
     return (n * factorial(n-1));
 }
 
-
+//takes the request for factorial
 app.get("/factorial", function(req, res){
     var n = req.query.value;
     console.log("param " + n);
@@ -33,7 +26,7 @@ app.get("/factorial", function(req, res){
     res.send({result : fact});
 });
 
-
+//calculate summation
 function summation(n){
     var n = parseInt(n);
     if(n == 0){
@@ -43,6 +36,7 @@ function summation(n){
     return (n + (summation(n - 1)));
 }
 
+//takes the request for factorial
 app.get("/summation", function(req, res){
 
     
