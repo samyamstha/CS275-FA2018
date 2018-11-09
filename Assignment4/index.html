@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>
+        Assignment 4
+    </title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./myscript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="panel" id="myPanel">
+            <ul data-role="listview">
+                <li>
+                    <a href="#" id="home">Home</a>
+                </li>
+                <li>
+                    <a href="#" id="calculator">Calculator</a>
+                </li>
+                <li>
+                    <a id="weather">Weather</a>
+                </li>
+                <button data-rel="close" data-icon="delete">Close</button>
+            </ul>
+        </div>
+
+        <!--header-->
+        <div data-role="header">
+            <a href=”#myPanel data-icon="bars">Menu</a>
+            <h2>Welcome to my node.js app</h2>
+        </div>
+
+
+        <!--Content div-->
+        <div id="content_div" class="ui-content">
+
+        </div>
+
+        <!--foter-->
+        <div data-role="footer" data-position="fixed">
+            <center>Samyam C. Shrestha</center>
+        </div>
+
+    </div>   
+</body>
+</html>
