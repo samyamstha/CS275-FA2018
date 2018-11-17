@@ -1,0 +1,23 @@
+<h2>Welcome to the Student Course Grade Repository</h2>
+<br>
+
+<p>Select a table to display:</p>
+<div data-role="controlgroup" data-type="vertical">
+    <Select id="aDropDown">
+        <option id="sTable" value="studentTable">View Students Table</option>
+        <option id="cTable" value="courseTable">View Coures Table</option>
+        <option id="gTable" value="gradesTable">View Grades Table</option>
+    </Select>
+    <br>
+    <button id="queryBtn" onclick="getData()">Get Table</button>
+</div>
+<p>
+    Click on the Menu on the top left to view the links. You can then click on the desired menu item and you will be redirected
+    to the respective template.
+</p>
+
+<center>
+    <div id="results">
+
+    </div>
+</center>
