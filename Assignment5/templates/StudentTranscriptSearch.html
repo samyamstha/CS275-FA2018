@@ -1,14 +1,25 @@
 <h2>Welcome to the Student Transcript Search</h2>
 <br>
+
 <p>Select a student</p>
-    <Select>
-        <option>Student A</option>
-        <option>Student B</option>
-    </Select>
+<Select id="studentDD">
+    <option value="Samyam">Samyam</option>
+    <option value="Ross">Ross</option>
+    <option value="Chandler">Chandler</option>
+    <option value="Joey">Joey</option>
+</Select>
 
-    <p>Select a term</p>
-    <Select>
-        <option>term A</option>
-        <option>term B</option>
-    </Select>
+<p>Select a term</p>
+<Select id="termDD">
+    <option value="FA18">Fall 18</option>
+    <option value="WI18">Winter 2018</option>
+    <option value="SP18">Spring 2018</option>
 
+</Select>
+
+<button onclick="getSearchData()">Search</button>
+<center>
+    <div id="results">
+
+    </div>
+</center>

@@ -50,8 +50,28 @@ app.get("/studentTranscriptSearch", function (req, res) {
 
 
 app.get("/getStudents", function (req, res) {
-    console.log("*********");
     con.query('select * from student',
+        function (err, rows, fields) {
+            if (err) {
+                console.log("Error during querying process");
+            } else {
+                console.log("Result : ", rows);
+                res.send(rows);
+            }
+        });
+});
+
+
+app.get("/getTranscript", function (req, res) {
+    console.log("*********");
+    var studentName = req.query.student;
+    var termName = req.query.term;
+    console.log(studentName + " " + termName);
+    var queryStr = "select student.StudentID, student.FirstName, student.LastName, grades.Term, course.CourseID, course.Description, grades.Grade ";
+    queryStr += "from student, course, grades ";
+    queryStr += "where student.FirstName = \'" + studentName + "\' && grades.StudentID = student.StudentID && grades.CourseID = course.CourseID && grades.Term=\'" + termName + "\'";
+   console.log(queryStr);
+    con.query(queryStr,
         function (err, rows, fields) {
             if (err) {
                 console.log("Error during querying process");
