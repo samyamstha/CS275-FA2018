@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
     //Display the display table page in startup
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://localhost:8080/displayTable"
-    // }).then(function (data) {
-    //     $("#content_div").html(data).enhanceWithin();
-    // });
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/displayTable"
+    }).then(function (data) {
+        $("#content_div").html(data).enhanceWithin();
+    });
 
 
     $("#display").click(function () {
@@ -17,6 +17,8 @@ $(document).ready(function () {
     $("#search").click(function () {
         let url = "http://localhost:8080/studentTranscriptSearch";
         route(url);
+           //get the latest name of the students and populate the Students dropdown
+            getStudentNames();
     });
 
 });
@@ -39,7 +41,7 @@ function route(URL) {
     });
 }
 
-
+//call the server for display table requests
 function getData() {
     console.log("Here");
     var selection = $("#aDropDown").val();
@@ -51,11 +53,11 @@ function getData() {
             "<tbody>";
         URL = "http://localhost:8080/getStudents";
     } else if (selection == "courseTable") {
-        data += "<table ><thead><tr><th>ID</th><th>Description</th></tr></thead>" +
+        data += "<table data-role='table' class='ui-responsive'><thead><tr><th>ID</th><th>Description</th></tr></thead>" +
             "<tbody>";
         URL = "http://localhost:8080/getCourses";
     } else {
-        data += "<table ><thead><tr><th>ID</th><th>Course ID</th><th>Student ID</th><th>Term</th><th>Grade</th></tr></thead>" +
+        data += "<table data-role='table' class='ui-responsive'><thead><tr><th>ID</th><th>Course ID</th><th>Student ID</th><th>Term</th><th>Grade</th></tr></thead>" +
             "<tbody>";
         URL = "http://localhost:8080/getGrades";
     }
@@ -82,17 +84,17 @@ function getData() {
                 data += dynamicTableRows;
             }
             data += "</tbody></table>";
-            $("#results").html(data);
+            $("#results").html(data).enhanceWithin();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Error occured for the Calculator.");
+            console.log("Error occured for while getting display table data.");
             //Display error message
             $("#results").html("<center>" + "Error Occured" + "</center>");
         }
     });
 }
 
-
+//call the server for transcript 
 function getSearchData() {
     var studentName = $("#studentDD").val();
     var termName = $("#termDD").val();
@@ -122,14 +124,75 @@ function getSearchData() {
             }
             data += "</tbody></table>";
         }
-            $("#results").html(data);
+            $("#results").html(data).enhanceWithin();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Error occured for the Calculator.");
+            console.log("Error occured for the getSearchData.");
             //Display error message
             $("#results").html("<center>" + "Error Occured" + "</center>");
         }
     });
+}
+
+
+//call to server to get the latest names of the students
+function getStudentNames(){
+    var URL = "http://localhost:8080/getStudentNames";
+    var data = "<Select id='studentDD'>";
+
+    $.ajax({
+        type:"GET",
+        url: URL,
+        success: function(msg){
+            for(var i =0; i < msg.length; i++){
+                console.log(msg[i].FirstName);
+                data += "<option value=" + msg[i].FirstName + ">" + msg[i].FirstName + "</option>";
+            }
+            data += "</Select>";
+            $("#studentsName").html(data).enhanceWithin();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            console.log(errorThrown);
+            console.log("Error occured for the getStudentsName.");
+            //Display error message
+            $("#results").html("<center>" + "Error Occured" + "</center>");
+        }
+    });
+}
+
+//call the server to add respective student
+function addStudent(){
+    var firstName = $("#firstName").val();
+    var lastName = $("#lastName").val();
+    var dob = $("#dob").val();
+    var major = $("#major").val();
+
+    // var params = {
+    //     fName : firstName,
+    //     lName : lastName,
+    //     DoB : dob,
+    //     maj : major
+    // };
+    console.log(firstName, dob, major, lastName);
+
+    var URL = "http://localhost:8080/addStudent?fName=" + firstName + "&lName=" + lastName + "&DoB=" + dob + "&maj=" + major;
+    $.ajax({
+        type:"POST",
+        url:URL,
+        success: function (msg) {
+            console.log(firstName, dob, major, lastName);
+            var str = "Student added!"
+            $("#results").html(msg);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error occured for the add student process.");
+            //Display error message
+            $("#results").html("<center>" + "Error Occured" + "</center>");
+        }
+
+    })
+
+    
 }
 
 
